@@ -58,6 +58,7 @@
         function allHandler() {
             $.get("http://127.0.0.1:1337/allnumbers",
                 function (data) {
+                    console.log("all works" + resp);
                     $('#writein').append(data);
                 });
             return false;
