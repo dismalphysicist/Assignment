@@ -1,13 +1,7 @@
 ﻿'use strict';
 var express = require('express');
 var router = express.Router();
-
-/* GET home page. */
-router.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
-});
-
-module.exports = router;
+var app = express();
 
 var people = [{ "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire" }];
 var numbers = [1, 2, 3];
@@ -29,4 +23,3 @@ app.post('/addnumber', function (req, resp) {
     resp.send("number added " + t);
 })
 
-app.listen(8090);
