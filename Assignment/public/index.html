@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Assignment</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
+          crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" 
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" 
+            crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Assignment - bare bones</h1>
+
+        <form id="myform" action="http://127.0.0.1:8090">
+            Enter a number:<br>
+            <input type="text" id="thisNumber">
+            <button id="submitButton">Search</button> <br>
+            <br>
+            <button id="allthesongs">See all numbers on file</button>
+
+            <br><br>
+            Or add a number: <br>
+            <input type="text" id="addNumber">
+            <button id="addButton">Add</button>
+        </form>
+
+        <div id="writein"> </div>
+    </div>
+
+
+
+
+    <script>
+        "use strict";
+
+        function formhandler() {
+            var n = $("#thisNumber").val();
+            // $("#writeIn").append(n + ", ");
+
+            $.get("http://127.0.0.1:8090/numbers", "number=" + n,
+                function (data) {
+                    $('#writein').append(data);
+                    var btn = document.createElement("BUTTON");        // Create a <button> element
+                    var t = document.createTextNode("CLICK ME");       // Create a text node
+                    btn.appendChild(t);                                // Append the text to <button>
+                    document.$("#writein").appendChild(btn);
+                });
+            return false;
+        }
+
+        function allHandler() {
+            $.get("http://127.0.0.1:8090/allnumbers",
+                function (data) {
+                    $('#writein').append(data);
+                });
+            return false;
+        }
+
+        function add() {
+            var n = $("#addNumber").val();
+            $.post("http://127.0.0.1:8090/addnumber", "number=" + n,
+                function (data) {
+                    $("#writein").append(data);
+                })
+            return false;
+        }
+
+        $("#submitButton").click(formhandler);
+        $("#myform").submit(formhandler);
+        $("#allthesongs").click(allHandler);
+        $("#addButton").click(add);
+
+    </script>
+</body>
+</html>
