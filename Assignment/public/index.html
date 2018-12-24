@@ -18,7 +18,7 @@
     <div class="container">
         <h1>Assignment - bare bones</h1>
 
-        <form id="myform" action="http://127.0.0.1:8090">
+        <form id="myform" action="http://127.0.0.1:1337">
             Enter a number:<br>
             <input type="text" id="thisNumber">
             <button id="submitButton">Search</button> <br>
@@ -44,7 +44,7 @@
             var n = $("#thisNumber").val();
             // $("#writeIn").append(n + ", ");
 
-            $.get("http://127.0.0.1:8090/numbers", "number=" + n,
+            $.get("http://127.0.0.1:1337/numbers", "number=" + n,
                 function (data) {
                     $('#writein').append(data);
                     var btn = document.createElement("BUTTON");        // Create a <button> element
@@ -56,7 +56,7 @@
         }
 
         function allHandler() {
-            $.get("http://127.0.0.1:8090/allnumbers",
+            $.get("http://127.0.0.1:1337/allnumbers",
                 function (data) {
                     $('#writein').append(data);
                 });
@@ -65,7 +65,7 @@
 
         function add() {
             var n = $("#addNumber").val();
-            $.post("http://127.0.0.1:8090/addnumber", "number=" + n,
+            $.post("http://127.0.0.1:1337/addnumber", "number=" + n,
                 function (data) {
                     $("#writein").append(data);
                 })
