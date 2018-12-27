@@ -18,8 +18,10 @@ router.get("/numbers", function (req, resp) {
     resp.send("hello world " + n);
 })
 
-router.get("/allnumbers", function (req, resp) {
-    resp.send("All numbers: " + numbers);
+router.get("/people", function (req, resp) {
+    console.log("all");
+    response = JSON.stringify(people);
+    resp.send(response);
 })
 
 router.post('/addnumber', function (req, resp) {

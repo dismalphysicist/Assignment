@@ -16,14 +16,14 @@
 
 <body>
     <div class="container">
-        <h1>Assignment - bare bones</h1>
+        <h1>Fell Race Organiser</h1>
 
         <form id="myform" action="http://127.0.0.1:1337">
-            Enter a number:<br>
+            <!--Enter a number:<br>
             <input type="text" id="thisNumber">
             <button id="submitButton">Search</button> <br>
-            <br>
-            <button id="allthesongs">See all numbers on file</button>
+            <br>-->
+            <button id="allthesongs">See all people on file</button>
 
             <br><br>
             Or add a number: <br>
@@ -31,8 +31,8 @@
             <button id="addButton">Add</button>
         </form>
 
-        <div id="writein"> </div>
     </div>
+    <div id="writein"> </div>
 
 
 
@@ -56,9 +56,9 @@
         }
 
         function allHandler() {
-            $.get("http://127.0.0.1:1337/allnumbers",
+            $.get("http://127.0.0.1:1337/people",
                 function (data) {
-                    console.log("all works" + resp);
+                    //var dat = JSON.stringify(data);
                     $('#writein').append(data);
                 });
             return false;
