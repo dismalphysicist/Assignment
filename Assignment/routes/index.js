@@ -20,8 +20,7 @@ router.get("/numbers", function (req, resp) {
 
 router.get("/people", function (req, resp) {
     console.log("all");
-    response = JSON.stringify(people);
-    resp.send(response);
+    resp.send(people);
 })
 
 router.post('/addnumber', function (req, resp) {
