@@ -15,8 +15,17 @@ var numbers = [1, 2, 3];
 router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
     var person = people.find(x => x.username === u);
-    var fname = person.forename;
-    var sname = person.surname;
+    var fname;
+    var sname;
+
+    if (person != undefined) {
+        fname = person.forename;
+        sname = person.surname;
+    }
+    else {
+        fname = " This user does not exist";
+        sname = "";
+    }
     resp.send(fname + " " + sname);
 })
 
