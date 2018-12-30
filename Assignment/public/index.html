@@ -18,11 +18,11 @@
     <div class="container">
         <h1>Fell Race Organiser</h1>
 
-        <form id="myform" action="http://127.0.0.1:1337">
-            <!--Enter a number:<br>
-            <input type="text" id="thisNumber">
+        <form id="myform" action="http://localhost:1337">
+            Find a user by username:<br>
+            <input type="text" id="username">
             <button id="submitButton">Search</button> <br>
-            <br>-->
+            <br>
             <button id="allthesongs">See all people on file</button>
 
             <br><br>
@@ -41,24 +41,24 @@
         "use strict";
 
         function formhandler() {
-            var n = $("#thisNumber").val();
+            var u = $("#username").val();
             // $("#writeIn").append(n + ", ");
 
-            $.get("http://127.0.0.1:1337/numbers", "number=" + n,
+            $.get("http://localhost:1337/people/:username", "username=" + u,
                 function (data) {
                     $('#writein').append(data);
-                    var btn = document.createElement("BUTTON");        // Create a <button> element
-                    var t = document.createTextNode("CLICK ME");       // Create a text node
-                    btn.appendChild(t);                                // Append the text to <button>
-                    document.$("#writein").appendChild(btn);
+                    //var btn = document.createElement("BUTTON");        // Create a <button> element
+                    //var t = document.createTextNode("CLICK ME");       // Create a text node
+                    //btn.appendChild(t);                                // Append the text to <button>
+                    //$("#writein").append(btn);
                 });
             return false;
         }
 
         function allHandler() {
-            $.get("http://127.0.0.1:1337/people",
+            $.get("http://localhost:1337/people", "",
                 function (data) {
-                    //var dat = JSON.stringify(data);
+                    console.log(data);
                     $('#writein').append(data);
                 });
             return false;
@@ -66,7 +66,7 @@
 
         function add() {
             var n = $("#addNumber").val();
-            $.post("http://127.0.0.1:1337/addnumber", "number=" + n,
+            $.post("http://localhost:1337/addnumber", "number=" + n,
                 function (data) {
                     $("#writein").append(data);
                 })

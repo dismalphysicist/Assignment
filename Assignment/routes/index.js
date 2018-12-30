@@ -12,16 +12,17 @@ module.exports = router;
 var people = [{ "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire" }];
 var numbers = [1, 2, 3];
 
-router.get("/numbers", function (req, resp) {
-    const n = req.query.number;
-    console.log("communicated");
-    resp.send("hello world " + n);
+router.get("/people/:username", function (req, resp) {
+    const u = req.query.username;
+    var person = people.find(x => x.username === u);
+    var fname = person.forename;
+    var sname = person.surname;
+    resp.send(fname + " " + sname);
 })
 
 router.get("/people", function (req, resp) {
-    console.log("all");
-    response = JSON.stringify(people);
-    resp.send(response);
+    console.log(people);
+    resp.send(people);
 })
 
 router.post('/addnumber', function (req, resp) {
