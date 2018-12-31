@@ -41,13 +41,18 @@
     <button id="allthesongs">See all people on file</button>-->
 
             <br><br>
-            Or add a person: <br>
-            Username: <input type="text" id="addPerson1"> <!--no checking currently-->
-            Forename: <input type="text" id="addPerson2">
-            Surname: <input type="text" id="addPerson3">
+            <button data-toggle="collapse" data-target="#demo">Add a person</button>
 
-            <button id="addButton">Add</button>
-            <br> <br>
+            <div id="demo" class="collapse">
+                Username: <input type="text" id="addPerson1"> <br /> <br /><!--no checking currently-->
+                Forename: <input type="text" id="addPerson2"> <br /> <br />
+                Surname: <input type="text" id="addPerson3"> <br><br />
+                Date of Birth: <input type="date" id="addPersonDoB" /> <br /> <br />
+                Sex: M <input type="checkbox" id="addPersonM" value="M" /> F <input type="checkbox" id="addPersonF" value="F" /> <br /> <br />
+                Disability? <input type="checkbox" id="addPersonDisability" value="d" /> <br /> <br />
+                <button id="addButton">Add</button>
+                <br> <br>
+            </div> 
         </form>
 
         <div id="writein"> </div>
