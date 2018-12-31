@@ -12,7 +12,7 @@
 
 <body>
 
-    <!--Navigation bar using Bootstrap-->
+    <!--Navigation bar using Bootstrap. Change to hamburger menu maybe?-->
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -30,16 +30,22 @@
     <div class="container">
         <h1>Fell Race Organiser</h1>
 
+        <!--Somewhere put in collapsible content e.g. an accordion or a button to hide/show-->
+
         <form id="myform" action="http://localhost:1337">
             Find a user by username:<br>
             <input type="text" id="username">
             <button id="submitButton">Search</button> <br>
-            <br>
-            <button id="allthesongs">See all people on file</button>
+
+            <!--<br>
+    <button id="allthesongs">See all people on file</button>-->
 
             <br><br>
-            Or add a number: <br>
-            <input type="text" id="addNumber">
+            Or add a person: <br>
+            Username: <input type="text" id="addPerson1"> <!--no checking currently-->
+            Forename: <input type="text" id="addPerson2">
+            Surname: <input type="text" id="addPerson3">
+
             <button id="addButton">Add</button>
             <br> <br>
         </form>
@@ -80,8 +86,11 @@
         }
 
         function add() {
-            var n = $("#addNumber").val();
-            $.post("http://localhost:1337/addnumber", "number=" + n,
+            var uname = $("#addPerson1").val();
+            var fname = $("#addPerson2").val();
+            var sname = $("#addPerson3").val();
+            $.post("http://localhost:1337/addperson", 
+                "username=" + uname + "&" + "forename=" + fname +"&"+ "surname=" + sname,
                 function (data) {
                     $("#writein").append(data);
                 })
@@ -90,7 +99,7 @@
 
         $("#submitButton").click(formhandler);
         $("#myform").submit(formhandler);
-        $("#allthesongs").click(allHandler);
+        // $("#allthesongs").click(allHandler);
         $("#addButton").click(add);
 
     </script>

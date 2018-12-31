@@ -34,10 +34,14 @@ router.get("/people", function (req, resp) {
     resp.send(people);
 })
 
-router.post('/addnumber', function (req, resp) {
+router.post('/addperson', function (req, resp) {
 
-    const t = req.body.number;
-    numbers.push(t);
-    resp.send("number added " + t);
+    const uname = req.body.username;
+    const fname = req.body.forename;
+    const sname = req.body.surname;
+    var person = { "username": uname, "forename": fname, "surname": sname };
+    people.push(person);
+    console.log(people);
+    resp.send("person added " + person);
 })
 
