@@ -36,14 +36,13 @@
             Find a user by username:<br>
             <input type="text" id="username">
             <button id="submitButton">Search</button> <br>
+        </form>
 
-            <!--<br>
-    <button id="allthesongs">See all people on file</button>-->
+        <br><br>
+        <button data-toggle="collapse" data-target="#demo">Add a person</button> <br /><br />
 
-            <br><br>
-            <button data-toggle="collapse" data-target="#demo">Add a person</button>
-
-            <div id="demo" class="collapse">
+        <div id="demo" class="collapse">
+            <form action="http://localhost:1337">
                 Username: <input type="text" id="addPerson1"> <br /> <br /><!--no checking currently-->
                 Forename: <input type="text" id="addPerson2"> <br /> <br />
                 Surname: <input type="text" id="addPerson3"> <br><br />
@@ -52,8 +51,8 @@
                 Disability? <input type="checkbox" id="addPersonDisability" value="d" /> <br /> <br />
                 <button id="addButton">Add</button>
                 <br> <br>
-            </div> 
-        </form>
+            </form>
+        </div> 
 
         <div id="writein"> </div>
 
