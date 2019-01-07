@@ -5,7 +5,7 @@ function formhandler() {
 
     $.get("http://localhost:1337/people/:username", "username=" + u,
         function (data) {
-            $('#writein').append(data);
+            $('#writein').html(data);
         });
     return false;
 }
@@ -35,7 +35,7 @@ function add() {
         "surname=" + $("#addPerson3").val() +"&"+ "dob=" + $("#DoB").val() +"&"+ "sex=" + sex +"&"+ 
         "disability=" + disability,
         function (data) {
-            $("#writein").append(data);
+            $("#writein").html(data);
         })
     return false;
 }
