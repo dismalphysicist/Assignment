@@ -37,6 +37,7 @@ function add() {
         function (data) {
             $("#writein").html(data);
         })
+    document.getElementById("addform").reset();
     return false;
 }
 

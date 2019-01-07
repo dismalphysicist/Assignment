@@ -35,7 +35,7 @@ router.get("/people", function (req, resp) {
 })
 
 router.post('/addperson', function (req, resp) {
-    console.log(req.body); //debugging 
+    //console.log(req.body); //debugging 
     const uname = req.body.username;
     const fname = req.body.forename;
     const sname = req.body.surname;
