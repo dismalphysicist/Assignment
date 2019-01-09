@@ -34,18 +34,21 @@
         </div>
     </nav>
 
-    <div class="container"> <!--Needs a recognisable grid layout-->
+    <div class="container">
+        <!--Needs a recognisable grid layout-->
         <h1>Fell Race Organiser</h1>
 
-        <!--Somewhere put in collapsible content e.g. an accordion or a button to hide/show-->
 
-        <form id="myform" action="http://localhost:1337">
+        <form id="searchform" action="http://localhost:1337">
             Find a user by username:<br>
             <input type="text" id="username">
             <button id="submitButton">Search</button> <br>
         </form>
 
+        <div id="searchresult"> </div>
+
         <br><br>
+        <!--Collapsible 'add a person' button and form-->
         <button data-toggle="collapse" data-target="#demo">Add a person</button> <br /><br />
 
         <div id="demo" class="collapse">
@@ -59,9 +62,9 @@
                 <button id="addButton">Add</button>
                 <br> <br>
             </form>
-        </div> 
+        </div>
 
-        <div id="writein"> </div>
+        <div id="added"> </div>
 
     </div>
 

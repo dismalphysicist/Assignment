@@ -39,7 +39,8 @@ router.post('/addperson', function (req, resp) {
     const uname = req.body.username;
     const fname = req.body.forename;
     const sname = req.body.surname;
-    var person = { "username": uname, "forename": fname, "surname": sname };
+    var person = { "username": req.body.username, "forename": req.body.forename, "surname": req.body.surname,
+        "DoB": req.body.dob, "sex": req.body.sex, "disability": req.body.disability };
     people.push(person);
     console.log(people);
     resp.send("person added " + person);
