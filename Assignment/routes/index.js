@@ -9,11 +9,11 @@ router.get('/', function (req, res) {
 
 module.exports = router;
 
-var people = [{ "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire" }];
-var numbers = [1, 2, 3];
+var people = [{
+    "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
 router.get("/people/:username", function (req, resp) {
-    const u = req.query.username;
+    const u = req.query.username.trim();
     var person = people.find(x => x.username === u);
     var fname;
     var sname;
@@ -21,27 +21,25 @@ router.get("/people/:username", function (req, resp) {
     if (person != undefined) {
         fname = person.forename;
         sname = person.surname;
+        resp.send(person); //fname + " " + sname
     }
     else {
-        fname = " This user does not exist";
-        sname = "";
+        resp.send(" This user does not exist");
     }
-    resp.send(fname + " " + sname);
 })
 
 router.get("/people", function (req, resp) {
-    console.log(people);
+    console.log(people); //debugging 
     resp.send(people);
 })
 
 router.post('/addperson', function (req, resp) {
     //console.log(req.body); //debugging 
-    const uname = req.body.username;
-    const fname = req.body.forename;
-    const sname = req.body.surname;
-    var person = { "username": req.body.username, "forename": req.body.forename, "surname": req.body.surname,
+    const uname = req.body.username.trim();
+    const fname = req.body.forename.trim();
+    const sname = req.body.surname.trim();
+    var person = { "username": uname, "forename": fname, "surname": sname,
         "DoB": req.body.dob, "sex": req.body.sex, "disability": req.body.disability };
     people.push(person);
-    console.log(people);
-    resp.send("person added " + person);
+    resp.send("Person added: " + fname + " " + sname);
 })

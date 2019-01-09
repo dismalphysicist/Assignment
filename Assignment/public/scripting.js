@@ -21,26 +21,34 @@ function formhandler() {
 
 function add() {
 
-    var sex = "M";
-    if ($("#sexF").val() == true) {
-        sex = "F";
-    }
-    var disability = false;
-    if ($("#addPersonDisability").val() == true) {
-        disability = true;
-    }
+    //console.log($("#DoB").val()); //debugging 
 
-    $.post("http://localhost:1337/addperson", 
-        "username=" + $("#addPerson1").val() +"&"+ "forename=" + $("#addPerson2").val() +"&"+ 
-        "surname=" + $("#addPerson3").val() +"&"+ "dob=" + $("#DoB").val() +"&"+ "sex=" + sex +"&"+ 
-        "disability=" + disability,
-        function (data) {
-            $("#added").html(data);
-        })
-    $("#searchresult").html(""); //clear search results when person is added
-    document.getElementById("searchform").reset();
-    document.getElementById("addform").reset();
-    return false;
+    if ($("#addPerson1").val() == "" | $("#addPerson2").val() == "" | $("#addPerson3").val() == "" | $("#DoB").val() == "") {
+        $("#added").html("Please fill in all fields.");
+        return false;
+    }
+    else {
+        var sex = "M";
+        if ($("#sexF").val() == true) {
+            sex = "F";
+        }
+        var disability = false;
+        if ($("#addPersonDisability").val() == true) {
+            disability = true;
+        }
+
+        $.post("http://localhost:1337/addperson",
+            "username=" + $("#addPerson1").val() + "&" + "forename=" + $("#addPerson2").val() + "&" +
+            "surname=" + $("#addPerson3").val() + "&" + "dob=" + $("#DoB").val() + "&" + "sex=" + sex + "&" +
+            "disability=" + disability,
+            function (data) {
+                $("#added").html(data);
+            })
+        $("#searchresult").html(""); //clear search results when person is added
+        document.getElementById("searchform").reset();
+        document.getElementById("addform").reset();
+        return false;
+    }
 }
 
 $("#submitButton").click(formhandler);
