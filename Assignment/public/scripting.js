@@ -7,6 +7,7 @@ function formhandler() {
         function (data) {
             $('#searchresult').html(data);
         });
+
     return false;
 }
 
@@ -29,11 +30,11 @@ function add() {
     }
     else {
         var sex = "M";
-        if ($("#sexF").val() == true) {
+        if ($("#sexF").val() == "F") {
             sex = "F";
         }
         var disability = false;
-        if ($("#addPersonDisability").val() == true) {
+        if ($("#addPersonDisability").val() == "d") {
             disability = true;
         }
 
@@ -46,7 +47,7 @@ function add() {
             })
         $("#searchresult").html(""); //clear search results when person is added
         document.getElementById("searchform").reset();
-        document.getElementById("addform").reset();
+        document.getElementById("addform").reset(); //how to not do this when username is taken? 
         return false;
     }
 }
