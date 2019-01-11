@@ -12,6 +12,9 @@ module.exports = router;
 var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
+//entrants is a list of people, same properties as those in the 'people' list - data structure? 
+var events = [{ "name": "Pen y Fan", "entrants": [] }];
+
 router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
     var person = people.find(x => x.username === u);

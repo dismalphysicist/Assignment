@@ -37,6 +37,9 @@
     <Compile Include="routes\index.js" />
     <Compile Include="routes\users.js" />
     <Content Include="package.json" />
+    <Content Include="public\admin.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\index.html">
       <SubType>Code</SubType>
     </Content>
