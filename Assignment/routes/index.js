@@ -13,7 +13,7 @@ var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
 //entrants is a list of people, same properties as those in the 'people' list - data structure? 
-var events = [{ "name": "Pen y Fan", "entrants": [] }];
+var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [] }];
 
 router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
@@ -49,5 +49,17 @@ router.post('/addperson', function (req, resp) {
     }
     else {
         resp.send("That username is taken.");
+    }
+})
+
+router.get("/events/:eventname", function (req, resp) {
+    const n = req.query.name;
+    var event = events.find(x => x.name === n);
+
+    if (event != undefined) {
+        resp.send(event.name + " " + event.date);
+    }
+    else {
+        resp.send("This event does not exist");
     }
 })

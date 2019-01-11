@@ -52,7 +52,20 @@ function add() {
     }
 }
 
+function eventsearch() {
+    var n = $("#eventname").val();
+
+    $.get("http://localhost:1337/events/:eventname", "name=" + n,
+        function (data) {
+            $('#eventsearchresult').html(data);
+        });
+
+    return false;
+}
+
 $("#submitButton").click(formhandler);
 $("#myform").submit(formhandler);
 // $("#allthesongs").click(allHandler);
 $("#addButton").click(add);
+
+$("#eventsubmitButton").click(eventsearch);

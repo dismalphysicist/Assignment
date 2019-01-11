@@ -39,32 +39,13 @@
         <h1>Fell Race Calendar</h1>
 
 
-        <form id="searchform" action="http://localhost:1337">
-            Find a user by username:<br>
-            <input type="text" id="username">
-            <button id="submitButton">Search</button> <br>
+        <form id="eventsearchform" action="http://localhost:1337">
+            Find an event:<br>
+            <input type="text" id="eventname">
+            <button id="eventsubmitButton">Search</button> <br>
         </form>
 
-        <div id="searchresult"> </div>
-
-        <br><br>
-        <!--Collapsible 'add a person' button and form-->
-        <button data-toggle="collapse" data-target="#demo">Add a person</button> <br /><br />
-
-        <div id="demo" class="collapse">
-            <form id="addform" action="http://localhost:1337">
-                Username: <input type="text" id="addPerson1"> <br /> <br /><!--no checking currently-->
-                Forename: <input type="text" id="addPerson2">
-                Surname: <input type="text" id="addPerson3"> <br><br />
-                Date of Birth: <input type="date" id="DoB" /> <br /> <br />
-                Sex: M <input type="radio" id="sexM" name="sex" value="M" /> F <input type="radio" id="sexF" name="sex" value="F" /> <br /> <br />
-                Disability? <input type="checkbox" id="addPersonDisability" value="d" /> <br /> <br />
-                <button id="addButton">Add</button>
-                <br> <br>
-            </form>
-        </div>
-
-        <div id="added"> </div>
+        <div id="eventsearchresult"> </div>
 
     </div>
 
