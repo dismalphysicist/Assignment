@@ -12,8 +12,8 @@ module.exports = router;
 var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
-//entrants is a list of people, same properties as those in the 'people' list - data structure? 
-var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [] }];
+//entrants is a list of people, who must be elements of the 'people' list
+var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [ people[0] ] }];
 
 router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
@@ -62,4 +62,19 @@ router.get("/events/:eventname", function (req, resp) {
     else {
         resp.send("This event does not exist");
     }
+})
+
+router.get("/events", function (req, resp) {
+    console.log(events); //debugging 
+    resp.send(events);
+})
+
+router.get("/addtoevent", function (req, resp) {
+    var u = req.query.username;
+    var n = req.query.eventname;
+    var person = people.find(x => x.username === u);
+    var event = events.find(x => x.name === n);
+    event.entrants.push(person);
+    console.log(event.entrants); //debugging 
+    resp.send("User " + u + " added to event " + n);
 })
