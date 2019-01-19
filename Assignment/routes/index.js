@@ -13,7 +13,8 @@ var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
 //entrants is a list of people, who must be elements of the 'people' list
-var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [ people[0] ] }];
+var events = [ { "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]] },
+    { "name": "Fan y Big", "date": "10-07-19", "entrants": [] } ];
 
 router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
@@ -28,12 +29,10 @@ router.get("/people/:username", function (req, resp) {
 })
 
 router.get("/people", function (req, resp) {
-    console.log(people); //debugging 
     resp.send(people);
 })
 
 router.post('/addperson', function (req, resp) {
-    //console.log(req.body); //debugging 
     var person = people.find(x => x.username === req.body.username);
 
     if (person == undefined) {
@@ -69,12 +68,20 @@ router.get("/events", function (req, resp) {
     resp.send(events);
 })
 
-router.get("/addtoevent", function (req, resp) {
-    var u = req.query.username;
-    var n = req.query.eventname;
+router.post("/addtoevent", function (req, resp) {
+    var u = req.body.username;
+    var id = req.body.eventID;
     var person = people.find(x => x.username === u);
-    var event = events.find(x => x.name === n);
-    event.entrants.push(person);
-    console.log(event.entrants); //debugging 
-    resp.send("User " + u + " added to event " + n);
+    var event = events[id];
+
+    //checking
+    var p = event.entrants.find(x => x.username === u);
+    if (p == undefined) {
+        event.entrants.push(person);
+        console.log(event.entrants); //debugging 
+        resp.send("User " + u + " added to event " + event.name);
+    }
+    else {
+        resp.send("That person is already registered.");
+    }
 })
