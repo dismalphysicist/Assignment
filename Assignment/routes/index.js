@@ -56,7 +56,7 @@ router.get("/events/:eventname", function (req, resp) {
     var event = events.find(x => x.name === n);
 
     if (event != undefined) {
-        resp.send(event.name + " " + event.date);
+        resp.send(event.name + ": " + event.date);
     }
     else {
         resp.send("This event does not exist");

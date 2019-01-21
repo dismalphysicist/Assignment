@@ -58,10 +58,19 @@ function eventsearch() {
 
     $.get("http://localhost:1337/events/:eventname", "name=" + n,
         function (data) {
-            $('#eventsearchresult').html(data);
+            $('#eventsearchresult').html(data + '<button id="registerinterest">Register interest</button>');
+            $("#registerinterest").click(register(data));
         });
 
     return false;
+}
+
+function register(event) { //WIP
+    var i = event.search(":");
+    var eventname = event.slice(0, i); 
+
+    $('#eventsearchresult').append();
+
 }
 
 function update() {
