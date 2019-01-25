@@ -1,6 +1,13 @@
 ﻿'use strict';
 var express = require('express');
-var app = express();
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function (req, res) {
+    res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
 
 var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
@@ -9,7 +16,7 @@ var people = [{
 var events = [ { "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]] },
     { "name": "Fan y Big", "date": "10-07-19", "entrants": [] } ];
 
-app.get("/people/:username", function (req, resp) {
+router.get("/people/:username", function (req, resp) {
     const u = req.query.username;
     var person = people.find(x => x.username === u);
 
@@ -21,11 +28,11 @@ app.get("/people/:username", function (req, resp) {
     }
 })
 
-app.get("/people", function (req, resp) {
+router.get("/people", function (req, resp) {
     resp.send(people);
 })
 
-app.post('/addperson', function (req, resp) {
+router.post('/addperson', function (req, resp) {
     var person = people.find(x => x.username === req.body.username);
 
     if (person == undefined) {
@@ -44,7 +51,7 @@ app.post('/addperson', function (req, resp) {
     }
 })
 
-app.get("/events/:eventname", function (req, resp) {
+router.get("/events/:eventname", function (req, resp) {
     const n = req.query.name;
     var event = events.find(x => x.name === n);
 
@@ -56,12 +63,12 @@ app.get("/events/:eventname", function (req, resp) {
     }
 })
 
-app.get("/events", function (req, resp) {
+router.get("/events", function (req, resp) {
     console.log(events); //debugging 
     resp.send(events);
 })
 
-app.post("/addtoevent", function (req, resp) {
+router.post("/addtoevent", function (req, resp) {
     var u = req.body.username;
     var id = req.body.eventID;
     var person = people.find(x => x.username === u);
@@ -78,5 +85,3 @@ app.post("/addtoevent", function (req, resp) {
         resp.send("That person is already registered.");
     }
 })
-
-app.listen(1337);
