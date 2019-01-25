@@ -2,12 +2,6 @@
 var express = require('express');
 var app = express();
 
-//app.use(express.static('public'));
-
-app.get('/', function (req, res) {
-    res.render('index', { title: 'Express' });
-}) 
-
 var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false }];
 
