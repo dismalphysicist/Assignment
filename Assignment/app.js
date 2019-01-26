@@ -1,6 +1,6 @@
 ﻿'use strict';
 var debug = require('debug');
-var express = require('express');
+//var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -10,7 +10,10 @@ var bodyParser = require('body-parser');
 var home = require('./index');
 //var users = require('./routes/users');
 
-var app = express();
+const express = require('express');
+const app = express();
+// ... add routes
+module.exports = app;
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
