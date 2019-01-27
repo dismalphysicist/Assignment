@@ -17,18 +17,27 @@ var people = [{
 
 //entrants is a list of people, who must be elements of the 'people' list
 var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]] },
-{ "name": "Fan y Big", "date": "10-07-19", "entrants": [] }];
+    { "name": "Fan y Big", "date": "10-07-19", "entrants": [] }];
+
+
+// thanks to Nico Tejera at https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+// returns something like "access_token=concertina&username=bobthebuilder"
+function serialise(obj) {
+    return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
+}
 
 app.get("/people/:username", function (req, resp) {
     const u = req.query.username;
-    var person = people.find(x => x.username === u);
+    var person = (people.find(x => x.username === u));
+    console.log(person); //debugging 
 
-    if (person != undefined) {
-        resp.send(person.forename + " " + person.surname);
-    }
-    else {
-        resp.send(" This user does not exist");
-    }
+    resp.send(person); 
+    //if (person != undefined) {
+    //    resp.send(person.forename + " " + person.surname);
+    //}
+    //else {
+    //    resp.send(" This user does not exist");
+    //}
 })
 
 app.get("/people", function (req, resp) {

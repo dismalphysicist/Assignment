@@ -5,7 +5,13 @@ function formhandler() {
 
     $.get("http://localhost:8090/people/:username", "username=" + u,
         function (data) {
-            $('#searchresult').html(data);
+            if (data != undefined) {
+                $('#searchresult').html(data.forename + " " + data.surname);
+            }
+            else {
+                $('#searchresult').html(" This user does not exist");
+            }
+            $('#searchresult').html(data.forename + " " + data.surname);
         });
 
     return false;
