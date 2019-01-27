@@ -2,8 +2,10 @@
   "name": "assignment",
   "version": "0.0.0",
   "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "node app"
+    "test": "jest",
+    "dev": "node index.js"
   },
   "description": "Assignment",
   "author": {
@@ -17,5 +19,8 @@
     "morgan": "^1.7.0",
     "pug": "^2.0.0-beta6",
     "serve-favicon": "^2.3.0"
+  },
+  "devDependencies": {
+    "jest": "^24.0.0"
   }
 }

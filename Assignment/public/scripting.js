@@ -3,7 +3,7 @@
 function formhandler() {
     var u = $("#username").val();
 
-    $.get("http://localhost:1337/people/:username", "username=" + u,
+    $.get("http://localhost:8090/people/:username", "username=" + u,
         function (data) {
             $('#searchresult').html(data);
         });
@@ -12,7 +12,7 @@ function formhandler() {
 }
 
 //function allHandler() {
-//    $.get("http://localhost:1337/people", "",
+//    $.get("http://localhost:8090/people", "",
 //        function (data) {
 //            console.log(data);
 //            $('#writein').append(data);
@@ -38,7 +38,7 @@ function add() {
             disability = true;
         }
 
-        $.post("http://localhost:1337/addperson",
+        $.post("http://localhost:8090/addperson",
             "username=" + $("#addPerson1").val() + "&" + "forename=" + $("#addPerson2").val() + "&" +
             "surname=" + $("#addPerson3").val() + "&" + "dob=" + $("#DoB").val() + "&" + "sex=" + sex + "&" +
             "disability=" + disability,
@@ -56,7 +56,7 @@ function add() {
 function eventsearch() {
     var n = $("#eventname").val();
 
-    $.get("http://localhost:1337/events/:eventname", "name=" + n,
+    $.get("http://localhost:8090/events/:eventname", "name=" + n,
         function (data) {
             $('#eventsearchresult').html(data + '<button id="registerinterest">Register interest</button>');
             $("#registerinterest").click(register(data));
@@ -75,7 +75,7 @@ function register(event) { //WIP
 
 function update() {
 
-    $.get("http://localhost:1337/people", "",
+    $.get("http://localhost:8090/people", "",
         function (data) {
             var options = '<select id="user">';
             for (var i = 0; i < data.length; i++) {
@@ -86,7 +86,7 @@ function update() {
             $("#useroptions").html(options);
         });
 
-    $.get("http://localhost:1337/events", "",
+    $.get("http://localhost:8090/events", "",
         function (data) {
             var options = '<select id="event">';
             for (var i = 0; i < data.length; i++) {
@@ -99,7 +99,7 @@ function update() {
 }
 
 function addtoevent() {
-    $.post("http://localhost:1337/addtoevent", "username=" + $("#user").val()
+    $.post("http://localhost:8090/addtoevent", "username=" + $("#user").val()
         + "&" + "eventID=" + $("#event").val(), function (data) {
             $("#addedtoevent").html(data);
         })
