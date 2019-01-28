@@ -5,7 +5,6 @@ function formhandler() {
 
     $.get("http://localhost:8090/people/" + u, "",
         function (data) {
-            //console.log(data); //debugging 
             if (data.username !== undefined) {                
                 $('#searchresult').html(data.forename + " " + data.surname);
             }
@@ -44,20 +43,22 @@ function add() {
             disability = true;
         }
 
-        $.post("http://localhost:8090/people",
-            "username=" + $("#addPerson1").val() + "&" +
-            "forename=" + $("#addPerson2").val() + "&" +
-            "surname=" + $("#addPerson3").val() + "&" +
-            "dob=" + $("#DoB").val() + "&" +
-            "sex=" + sex + "&" +
-            "disability=" + disability,
+    $.post("http://localhost:8090/people",
+        {
+            username: $("#addPerson1").val(),
+            forename: $("#addPerson2").val(),
+            surname: $("#addPerson3").val(),
+            dob: $("#DoB").val(),
+            sex: sex,
+            disability: disability
+        },
             function (data) {
                 $("#added").html(data);
             })
-        $("#searchresult").html(""); //clear search results when person is added
-        document.getElementById("searchform").reset();
-        document.getElementById("addform").reset(); //how to not do this when username is taken? 
-        update();
+        //$("#searchresult").html(""); //clear search results when person is added
+        //document.getElementById("searchform").reset();
+        //document.getElementById("addform").reset(); //how to not do this when username is taken? 
+        //update();
         return false;
     //}
 }

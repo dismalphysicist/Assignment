@@ -23,13 +23,8 @@ var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]]
 
 
 app.get("/people/:username", function (req, resp) {
-    console.log(req.params);
     var u = req.params.username;
     var person = people.find(x => x.username === u);
-
-    //console.log(person); //debugging 
-    //var jsonPerson = { "Content-type": "/json/", "body": person };
-    //console.log(jsonPerson); //debugging 
 
     resp.send(person); 
 })
@@ -43,7 +38,7 @@ app.post('/people', function (req, resp) {
     console.log(req.body); //debugging  
     //var person = people.find(x => x.username === req.body.username);
 
-    //if (person == undefined) {
+    //if (person == undefined) { //temporarily removing checks - debugging - NEEDS UNCOMMENTING 
         const uname = req.body.username.trim();
         const fname = req.body.forename.trim();
         const sname = req.body.surname.trim();
