@@ -1,17 +1,20 @@
 ﻿"use strict";
 
 function formhandler() {
-    var u = $("#username").val();
+    var u = $("#username").val().trim();
+    //"username=" + u
 
-    $.get("http://localhost:8090/people/:username", "username=" + u,
+    $.get("http://localhost:8090/people/" + u, "",
         function (data) {
+            console.log(data); //debugging 
             if (data != undefined) {
+                console.log(data['surname']); //debugging 
+                
                 $('#searchresult').html(data.forename + " " + data.surname);
             }
             else {
                 $('#searchresult').html(" This user does not exist");
             }
-            $('#searchresult').html(data.forename + " " + data.surname);
         });
 
     return false;

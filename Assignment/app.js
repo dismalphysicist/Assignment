@@ -20,24 +20,16 @@ var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]]
     { "name": "Fan y Big", "date": "10-07-19", "entrants": [] }];
 
 
-// thanks to Nico Tejera at https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
-// returns something like "access_token=concertina&username=bobthebuilder"
-function serialise(obj) {
-    return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
-}
-
 app.get("/people/:username", function (req, resp) {
-    const u = req.query.username;
-    var person = (people.find(x => x.username === u));
+    console.log(req.params);
+    var u = req.params.username;
+    var person = people.find(x => x.username === u);
+
     console.log(person); //debugging 
+    //var jsonPerson = { "Content-type": "/json/", "body": person };
+    //console.log(jsonPerson); //debugging 
 
     resp.send(person); 
-    //if (person != undefined) {
-    //    resp.send(person.forename + " " + person.surname);
-    //}
-    //else {
-    //    resp.send(" This user does not exist");
-    //}
 })
 
 app.get("/people", function (req, resp) {
@@ -76,7 +68,7 @@ app.get("/events/:eventname", function (req, resp) {
 })
 
 app.get("/events", function (req, resp) {
-    console.log(events); //debugging 
+    //console.log(events); //debugging 
     resp.send(events);
 })
 
@@ -90,7 +82,7 @@ app.post("/addtoevent", function (req, resp) {
     var p = event.entrants.find(x => x.username === u);
     if (p == undefined) {
         event.entrants.push(person);
-        console.log(event.entrants); //debugging 
+        //console.log(event.entrants); //debugging 
         resp.send("User " + u + " added to event " + event.name);
     }
     else {
