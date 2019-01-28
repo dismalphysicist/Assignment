@@ -6,6 +6,8 @@ module.exports = app;
 
 app.use(express.static("public"));
 
+const bodyParser = require("body-parser");
+
 /* GET home page. */
 app.get('/', function (req, res) {
     res.sendfile("index.html");
@@ -25,7 +27,7 @@ app.get("/people/:username", function (req, resp) {
     var u = req.params.username;
     var person = people.find(x => x.username === u);
 
-    console.log(person); //debugging 
+    //console.log(person); //debugging 
     //var jsonPerson = { "Content-type": "/json/", "body": person };
     //console.log(jsonPerson); //debugging 
 
@@ -36,10 +38,12 @@ app.get("/people", function (req, resp) {
     resp.send(people);
 })
 
-app.post('/addperson', function (req, resp) {
-    var person = people.find(x => x.username === req.body.username);
+app.post('/people', function (req, resp) {
+    //console.log(req); //debugging 
+    console.log(req.body); //debugging  
+    //var person = people.find(x => x.username === req.body.username);
 
-    if (person == undefined) {
+    //if (person == undefined) {
         const uname = req.body.username.trim();
         const fname = req.body.forename.trim();
         const sname = req.body.surname.trim();
@@ -49,10 +53,11 @@ app.post('/addperson', function (req, resp) {
         };
         people.push(person);
         resp.send("Person added: " + fname + " " + sname);
-    }
-    else {
-        resp.send("That username is taken.");
-    }
+    //}
+    //else {
+        //resp.status(400);
+        //resp.send("That username is taken.");
+    //
 })
 
 app.get("/events/:eventname", function (req, resp) {

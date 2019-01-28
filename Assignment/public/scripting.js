@@ -2,14 +2,11 @@
 
 function formhandler() {
     var u = $("#username").val().trim();
-    //"username=" + u
 
     $.get("http://localhost:8090/people/" + u, "",
         function (data) {
-            console.log(data); //debugging 
-            if (data != undefined) {
-                console.log(data['surname']); //debugging 
-                
+            //console.log(data); //debugging 
+            if (data.username !== undefined) {                
                 $('#searchresult').html(data.forename + " " + data.surname);
             }
             else {
@@ -33,11 +30,11 @@ function add() {
 
     //console.log($("#DoB").val()); //debugging 
 
-    if ($("#addPerson1").val() == "" | $("#addPerson2").val() == "" | $("#addPerson3").val() == "" | $("#DoB").val() == "") {
-        $("#added").html("Please fill in all fields.");
-        return false;
-    }
-    else {
+    //if ($("#addPerson1").val() == "" | $("#addPerson2").val() == "" | $("#addPerson3").val() == "" | $("#DoB").val() == "") {
+    //    $("#added").html("Please fill in all fields.");
+    //    return false;
+    //}
+    //else { //temporarily removing checks - debugging - NEEDS UNCOMMENTING 
         var sex = "M";
         if ($("#sexF").val() == "F") {
             sex = "F";
@@ -47,9 +44,12 @@ function add() {
             disability = true;
         }
 
-        $.post("http://localhost:8090/addperson",
-            "username=" + $("#addPerson1").val() + "&" + "forename=" + $("#addPerson2").val() + "&" +
-            "surname=" + $("#addPerson3").val() + "&" + "dob=" + $("#DoB").val() + "&" + "sex=" + sex + "&" +
+        $.post("http://localhost:8090/people",
+            "username=" + $("#addPerson1").val() + "&" +
+            "forename=" + $("#addPerson2").val() + "&" +
+            "surname=" + $("#addPerson3").val() + "&" +
+            "dob=" + $("#DoB").val() + "&" +
+            "sex=" + sex + "&" +
             "disability=" + disability,
             function (data) {
                 $("#added").html(data);
@@ -59,7 +59,7 @@ function add() {
         document.getElementById("addform").reset(); //how to not do this when username is taken? 
         update();
         return false;
-    }
+    //}
 }
 
 function eventsearch() {
