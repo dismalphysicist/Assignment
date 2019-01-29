@@ -1,5 +1,11 @@
 ﻿"use strict";
 
+// thanks to Nico Tejera at https://stackoverflow.com/questions/1714786/query-string-encoding-of-a-javascript-object
+// returns something like "access_token=concertina&username=bobthebuilder"
+function serialise(obj) {
+    return Object.keys(obj).map(k => `${encodeURIComponent(k)}=${encodeURIComponent(obj[k])}`).join('&');
+}
+
 function formhandler() {
     var u = $("#username").val().trim();
 
@@ -122,8 +128,7 @@ function createAccount() {
             })
 
         //this is create an account 
-        $("#createButton").hide();
-        $("#indexcreateaccount").hide();
+        $("#indexcreateaccount").collapse();
         update();
         return false;
     }
@@ -132,21 +137,53 @@ function createAccount() {
 function eventsearch() {
     var n = $("#eventname").val();
 
-    $.get("http://localhost:8090/events/:eventname", "name=" + n,
-        function (data) {
-            $('#eventsearchresult').html(data + '<button id="registerinterest">Register interest</button>');
-            $("#registerinterest").click(register(data));
-        });
+    if (n !== "") {
+        $.get("http://localhost:8090/events/" + n, "",
+            function (data) {
+                if (data.name !== undefined) {
+                    $("#eventsearchresult").html(data.name + ": " + data.date
+                        + '<br><button id="registerinterest">Register interest</button>'
+                        + '<br><button id="cleareventsearch">Clear search</button>');
+
+                    $("#registerinterest").click(function () {
+                        $("#eventsearchresult").append('<div id="showwhenregistering"> <form id="registerforeventform"> Username: <input type="text" id="uname" /> Password: <input type="text" id="password1" /><button id="reg">Register</button></form></div>');
+                        $("#reg").click(register);
+                    });
+
+                    $("#cleareventsearch").click(reseteventform);
+                }
+                else {
+                    $("#eventsearchresult").html("This event does not exist");
+                }
+            });
+    }
 
     return false;
 }
 
-function register(event) { //WIP
-    var i = event.search(":");
-    var eventname = event.slice(0, i); 
 
-    $('#eventsearchresult').append();
+function register() {
+    $.post("http://localhost:8090/addtoevent/", {
+        username: $("#uname").val(),
+        eventname: $("#eventname").val().trim(), //note may have either upper/lowercase 
+        access_token: $("password1").val()
+    },
+    function (req, resp) {
+        $('#eventsearchresult').html("You are now registered");
+    })
+    return false;
+}
 
+
+
+function addtoevent() {
+    $.post("http://localhost:8090/addtoevent", "username=" + $("#user").val()
+        + "&" + "eventID=" + $("#event").val(), function (data) {
+            $("#addedtoevent").html(data);
+        })
+    $("#searchresult").html(""); //clear search result 
+    $("#added").html("");
+    return false;
 }
 
 function update() {
@@ -174,17 +211,13 @@ function update() {
         });
 }
 
-function addtoevent() {
-    $.post("http://localhost:8090/addtoevent", "username=" + $("#user").val()
-        + "&" + "eventID=" + $("#event").val(), function (data) {
-            $("#addedtoevent").html(data);
-        })
-    $("#searchresult").html(""); //clear search result 
-    $("#added").html("");
-    return false; 
+function reseteventform() {
+    document.getElementById("eventsearchform").reset();
+    $("#eventsearchresult").html("");
 }
 
 window.onload = update();
+window.onload = $("#showwhenregistering").hide();
 
 $("#submitButton").click(formhandler);
 $("#myform").submit(formhandler);

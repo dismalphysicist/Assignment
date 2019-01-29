@@ -70,15 +70,9 @@ app.post('/people', function (req, resp) {
 })
 
 app.get("/events/:eventname", function (req, resp) {
-    const n = req.query.name;
-    var event = events.find(x => x.name === n);
-
-    if (event != undefined) {
-        resp.send(event.name + ": " + event.date);
-    }
-    else {
-        resp.send("This event does not exist");
-    }
+    const n = req.params.eventname.trim().toLowerCase();
+    var event = events.find(x => x.name.toLowerCase() === n);
+    resp.send(event);
 })
 
 app.get("/events", function (req, resp) {
@@ -88,9 +82,9 @@ app.get("/events", function (req, resp) {
 
 app.post("/addtoevent", function (req, resp) {
     var u = req.body.username;
-    var id = req.body.eventID;
+    var name = req.body.eventname;
     var person = people.find(x => x.username === u);
-    var event = events[id];
+    var event = events.find(x => x.name.toLowerCase() === name.toLowerCase());
 
     //checking
     var p = event.entrants.find(x => x.username === u);
