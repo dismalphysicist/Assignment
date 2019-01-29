@@ -7,6 +7,8 @@ module.exports = app;
 app.use(express.static("public"));
 
 const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }))
+
 
 /* GET home page. */
 app.get('/', function (req, res) {
@@ -34,26 +36,25 @@ app.get("/people", function (req, resp) {
 })
 
 app.post('/people', function (req, resp) {
-    //console.log(req); //debugging 
-    console.log(req.body); //debugging  
-    //var person = people.find(x => x.username === req.body.username);
+  
+    var person = people.find(x => x.username === req.body.username);
 
-    //if (person == undefined) { //temporarily removing checks - debugging - NEEDS UNCOMMENTING 
-        const uname = req.body.username.trim();
-        const fname = req.body.forename.trim();
-        const sname = req.body.surname.trim();
+    if (person == undefined) { 
+        const uname = req.body.username;
+        const fname = req.body.forename;
+        const sname = req.body.surname;
         var person = {
             "username": uname, "forename": fname, "surname": sname,
             "DoB": req.body.dob, "sex": req.body.sex, "disability": req.body.disability
         };
         people.push(person);
         resp.send("Person added: " + fname + " " + sname);
-    //}
-    //else {
-        //resp.status(400);
+    }
+    else {
+        resp.status(400);
         //resp.send("That username is taken.");
-    //
-})
+    })
+}
 
 app.get("/events/:eventname", function (req, resp) {
     const n = req.query.name;
