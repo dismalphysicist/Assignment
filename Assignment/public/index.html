@@ -47,11 +47,42 @@
 
         <div id="eventsearchresult"> </div><br /><br />
 
-   
+        <!--Collapsible 'login' button and form-->
+        <!--<button data-toggle="collapse" data-target="#demo">Login</button> <br /><br />
+
+        <div id="indexlogin" class="collapse">
+            <form id="addform" action="http://localhost:8090">
+                Username: <input type="text" id="loginusername"> <br /> <br />
+                Password: <input type="text" id="loginpassword"> <br /> <br />
+                <button id="addButton">Create</button>
+                <br> <br>
+            </form>
+        </div>-->
+
+        <!--Collapsible 'create an account' button and form-->
+        <button data-toggle="collapse" data-target="#indexcreateaccount">Create an account</button> <br /><br />
+
+        <div id="indexcreateaccount" class="collapse">
+            <form id="indexaddform" action="http://localhost:8090">
+                Username: <input type="text" id="createaccountusername"> <br /> <br />
+                Forename: <input type="text" id="createaccountforename">
+                Surname: <input type="text" id="createaccountsurname"> <br><br />
+                Date of Birth: <input type="date" id="indexDoB" /> <br /> <br />
+                Sex: M <input type="radio" id="indexsexM" name="sex" value="M" /> F <input type="radio" id="indexsexF" name="sex" value="F" /> <br /> <br />
+                Disability? <input type="checkbox" id="indexaddPersonDisability" value="d" /> <br /> <br />
+                Password: <input type="text" id="password"> <br /> <br />
+                <button id="createButton">Create</button>
+                <br> <br>
+            </form>
+        </div>
+
+        <div id="createdaccount"> </div><br /><br />
+
+
         <form id="reginterestform">
             <!--Work in Progress-->
-            Please enter your 
-        </form> 
+            Please enter your
+        </form>
 
     </div>
 

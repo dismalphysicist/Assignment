@@ -19,6 +19,8 @@ var people = [{
     "username": "doctorwhocomposer", "forename": "Delia", "surname": "Derbyshire", "DoB": "1937-05-05", "sex": "F", "disability": false
 }];
 
+var passwords = ["pwd123"];
+
 //entrants is a list of people, who must be elements of the 'people' list
 var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]] },
     { "name": "Fan y Big", "date": "10-07-19", "entrants": [] }];
@@ -31,6 +33,12 @@ app.get("/people/:username", function (req, resp) {
     resp.send(person); 
 })
 
+//delete after testing 
+app.get("/people/:username/password", function (req, resp) {
+    var personIndex = people.findIndex(x => x.username === req.params.username);
+    resp.send(passwords[personIndex]);
+})
+
 app.get("/people", function (req, resp) {
     resp.send(people);
 })
@@ -39,7 +47,7 @@ app.post('/people', function (req, resp) {
   
     var person = people.find(x => x.username === req.body.username);
 
-    if (person == undefined) {
+    if (person == undefined && req.body.access_token != undefined) {
         const uname = req.body.username;
         const fname = req.body.forename;
         const sname = req.body.surname;
@@ -48,7 +56,12 @@ app.post('/people', function (req, resp) {
             "DoB": req.body.dob, "sex": req.body.sex, "disability": req.body.disability
         };
         people.push(person);
-        resp.send("Person added: " + fname + " " + sname);
+        passwords.push(req.body.access_token);
+        resp.send("Account created for " + fname + " " + sname);
+    }
+    else if (req.body.access_token == undefined){
+        resp.status(403);
+        resp.send("Access token needed");
     }
     else {
         resp.status(400); //error code 

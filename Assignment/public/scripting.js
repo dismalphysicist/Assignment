@@ -56,21 +56,74 @@ function add() {
                 surname: $("#addPerson3").val(),
                 dob: $("#DoB").val(),
                 sex: sex,
-                disability: disability
+                disability: disability,
+                access_token: "concertina"
             },
             function (data) {
-                try {
-                    $("#added").html(data);
-                    document.getElementById("addform").reset(); //how to not do this when username is taken? 
+                if (data.status == "400") {
+                    //bad request
+                    console.log("That username is taken.");
+                    $("#added").html("That username is taken.");
                 }
-                catch (error) {
-                    alert("That username is taken.");
-                    console.error(error);
+                else {
+                    $("#added").html(data);
+                    document.getElementById("addform").reset();
                 }
             })
 
         $("#searchresult").html(""); //clear search results when person is added
         document.getElementById("searchform").reset();
+        update();
+        return false;
+    }
+}
+
+function createAccount() {
+    if ($("#createaccountusername").val() == "" | $("#createaccountforename").val() == "" | $("#createaccountsurname").val() == "" | $("#indexDoB").val() == "" | $("#password").val() == "") {
+        $("#createdaccount").html("Please fill in all fields.");
+        return false;
+    }
+    else {
+        var sex, disability;
+        if ($("#indexsexF").val() == true) {
+            sex = "F";
+        }
+        else {
+            sex = "M";
+        }
+
+        if ($("#indexaddPersonDisability").val() == true) {
+            disability = true;
+        }
+        else {
+            var disability = false;
+        }
+
+        $.post("http://localhost:8090/people",
+            {
+                username: $("#createaccountusername").val(),
+                forename: $("#createaccountforename").val(),
+                surname: $("#createaccountsurname").val(),
+                dob: $("#indexDoB").val(),
+                sex: sex,
+                disability: disability,
+                access_token: $("#password").val()
+            },
+            function (data) {
+                if (data.status == "400") {
+                    //bad request
+                    console.log("That username is taken.");
+                    $("#createdaccount").html("That username is taken.");
+                }
+                else {
+                    $("#createdaccount").html(data);
+                    document.getElementById("indexaddform").reset();
+                }
+            })
+
+        //this is create an account 
+        $("#createButton").hide();
+        $("#indexcreateaccount").hide();
         update();
         return false;
     }
@@ -138,6 +191,9 @@ $("#myform").submit(formhandler);
 // $("#allthesongs").click(allHandler);
 $("#addButton").click(add);
 $("#addform").submit(add);
+
+$("#createButton").click(createAccount);
+$("#indexaddform").submit(createAccount);
 
 $("#eventsubmitButton").click(eventsearch);
 $("#eventsearchform").submit(eventsearch);
