@@ -53,15 +53,21 @@ function add() {
                 disability: disability
             },
             function (data) {
-                $("#added").html(data);
+                try {
+                    $("#added").html(data);
+                }
+                catch (error) {
+                    alert("That username is taken.");
+                    console.error(error);
+                }
             })
 
         //$("#searchresult").html(""); //clear search results when person is added
         //document.getElementById("searchform").reset();
         //document.getElementById("addform").reset(); //how to not do this when username is taken? 
-        //update();
+        update();
         return false;
-    //}
+    }
 }
 
 function eventsearch() {

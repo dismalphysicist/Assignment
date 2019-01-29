@@ -39,7 +39,7 @@ app.post('/people', function (req, resp) {
   
     var person = people.find(x => x.username === req.body.username);
 
-    if (person == undefined) { 
+    if (person == undefined) {
         const uname = req.body.username;
         const fname = req.body.forename;
         const sname = req.body.surname;
@@ -51,10 +51,10 @@ app.post('/people', function (req, resp) {
         resp.send("Person added: " + fname + " " + sname);
     }
     else {
-        resp.status(400);
-        //resp.send("That username is taken.");
-    })
-}
+        resp.status(400); //error code 
+        resp.send("That username is taken.");
+    }
+})
 
 app.get("/events/:eventname", function (req, resp) {
     const n = req.query.name;
