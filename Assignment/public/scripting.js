@@ -34,13 +34,19 @@ function add() {
         return false;
     }
     else { 
-        var sex = "M";
-        if ($("#sexF").val() == "F") {
+        var sex, disability;
+        if ($("#sexF").val() == true) {
             sex = "F";
         }
-        var disability = false;
-        if ($("#addPersonDisability").val() == "d") {
+        else {
+            sex = "M";
+        }
+
+        if ($("#addPersonDisability").val() == true) {
             disability = true;
+        }
+        else {
+            var disability = false;
         }
 
         $.post("http://localhost:8090/people",
@@ -55,6 +61,7 @@ function add() {
             function (data) {
                 try {
                     $("#added").html(data);
+                    document.getElementById("addform").reset(); //how to not do this when username is taken? 
                 }
                 catch (error) {
                     alert("That username is taken.");
@@ -62,9 +69,8 @@ function add() {
                 }
             })
 
-        //$("#searchresult").html(""); //clear search results when person is added
-        //document.getElementById("searchform").reset();
-        //document.getElementById("addform").reset(); //how to not do this when username is taken? 
+        $("#searchresult").html(""); //clear search results when person is added
+        document.getElementById("searchform").reset();
         update();
         return false;
     }
