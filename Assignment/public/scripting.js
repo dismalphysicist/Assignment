@@ -41,14 +41,14 @@ function add() {
     }
     else { 
         var sex, disability;
-        if ($("#sexF").val() == true) {
+        if ($("#sexF").is(":checked")) {
             sex = "F";
         }
         else {
             sex = "M";
         }
 
-        if ($("#addPersonDisability").val() == true) {
+        if ($("#addPersonDisability").is(":checked")) {
             disability = true;
         }
         else {
@@ -91,14 +91,15 @@ function createAccount() {
     }
     else {
         var sex, disability;
-        if ($("#indexsexF").val() == true) {
+
+        if ($("#index_sexF").is(":checked")) {
             sex = "F";
         }
         else {
             sex = "M";
         }
 
-        if ($("#indexaddPersonDisability").val() == true) {
+        if ($("#indexaddPersonDisability").is(":checked")) {
             disability = true;
         }
         else {
