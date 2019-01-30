@@ -81,6 +81,7 @@ app.get("/events", function (req, resp) {
 })
 
 app.post("/addtoevent", function (req, resp) {
+    console.log(req.body); //debugging 
     var u = req.body.username;
     var name = req.body.eventname;
     var person = people.find(x => x.username === u);

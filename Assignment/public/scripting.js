@@ -177,10 +177,14 @@ function register() {
 
 
 function addtoevent() {
-    $.post("http://localhost:8090/addtoevent", "username=" + $("#user").val()
-        + "&" + "eventID=" + $("#event").val(), function (data) {
+    $.post("http://localhost:8090/addtoevent", {
+        username: $("#useroptions").val(),
+        eventname: $("#eventoptions").val().trim(), //note may have either upper/lowercase 
+        access_token: "concertina"
+    },
+    function (data) {
             $("#addedtoevent").html(data);
-        })
+    })
     $("#searchresult").html(""); //clear search result 
     $("#added").html("");
     return false;
