@@ -165,7 +165,7 @@ function eventsearch() {
 function register() {
     $.post("http://localhost:8090/addtoevent/", {
         username: $("#uname").val(),
-        eventname: $("#eventname").val().trim(), //note may have either upper/lowercase 
+        event: $("#eventname").val().trim(), //note may have either upper/lowercase 
         access_token: $("password1").val()
     },
     function (req, resp) {
@@ -178,8 +178,8 @@ function register() {
 
 function addtoevent() {
     $.post("http://localhost:8090/addtoevent", {
-        username: $("#useroptions").val(),
-        eventname: $("#eventoptions").val().trim(), //note may have either upper/lowercase 
+        username: $("#user").val(),
+        event: $("#event").val(), 
         access_token: "concertina"
     },
     function (data) {
@@ -208,7 +208,7 @@ function update() {
             var options = '<select id="event">';
             for (var i = 0; i < data.length; i++) {
                 var event = data[i];
-                options += '<option value=' + i + '>' + event.name + " " + event.date + '</option>';
+                options += '<option value=' + event.date + '>' + event.name + " " + event.date + '</option>';
             }
             options += '</select>';
             $("#eventoptions").html(options);

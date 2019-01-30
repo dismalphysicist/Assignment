@@ -81,12 +81,19 @@ app.get("/events", function (req, resp) {
 })
 
 app.post("/addtoevent", function (req, resp) {
-    console.log(req.body); //debugging 
+    //console.log(req.body); //debugging 
     var u = req.body.username;
-    var name = req.body.eventname;
+    var nameordate = req.body.event;
     var person = people.find(x => x.username === u);
-    var event = events.find(x => x.name.toLowerCase() === name.toLowerCase());
+    var event;
 
+    event = events.find(x => x.name.toLowerCase() === nameordate.toLowerCase());
+
+    if (event == undefined) {
+        //must have been a date instead 
+        event = events.find(x => x.date === nameordate);
+    }
+    
     //checking
     var p = event.entrants.find(x => x.username === u);
     if (p == undefined) {
