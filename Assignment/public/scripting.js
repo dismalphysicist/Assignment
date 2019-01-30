@@ -166,8 +166,8 @@ function eventsearch() {
 function register() {
     $.post("http://localhost:8090/addtoevent/", {
         username: $("#uname").val(),
-        event: $("#eventname").val().trim(), //note may have either upper/lowercase 
-        access_token: $("password1").val()
+        event: $("#eventname").val().trim(),
+        access_token: $("#password1").val()
     },
     function (data) {
         $('#eventsearchresultextended').html("\n" + data);

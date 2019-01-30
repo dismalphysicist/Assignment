@@ -97,15 +97,28 @@ app.post("/addtoevent", function (req, resp) {
     //checking
     var p = event.entrants.find(x => x.username === u);
     var q = people.find(x => x.username === u);
-    if (p == undefined && q != undefined) {
+    if (p == undefined && q != undefined && passwordCheck(u, req.body.access_token)) {
         event.entrants.push(person);
         //console.log(event.entrants); //debugging 
         resp.send("User " + u + " registered for event " + event.name);
     }
-    else if (q != undefined) {
+    else if (q != undefined && passwordCheck(u, req.body.access_token)) {
         resp.send("That person is already registered.");
     }
     else {
-        resp.send("Please enter an existing user.");
+        resp.send("Incorrect username or password.");
     }
 })
+
+function passwordCheck(username, password) {
+    var i = people.findIndex(x => x.username === username);
+    if (password === "concertina") {
+        return true;
+    }
+    else if (passwords[i] === password) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
