@@ -96,12 +96,16 @@ app.post("/addtoevent", function (req, resp) {
     
     //checking
     var p = event.entrants.find(x => x.username === u);
-    if (p == undefined) {
+    var q = people.find(x => x.username === u);
+    if (p == undefined && q != undefined) {
         event.entrants.push(person);
         //console.log(event.entrants); //debugging 
-        resp.send("User " + u + " added to event " + event.name);
+        resp.send("User " + u + " registered for event " + event.name);
+    }
+    else if (q != undefined) {
+        resp.send("That person is already registered.");
     }
     else {
-        resp.send("That person is already registered.");
+        resp.send("Please enter an existing user.");
     }
 })

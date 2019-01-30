@@ -169,8 +169,8 @@ function register() {
         event: $("#eventname").val().trim(), //note may have either upper/lowercase 
         access_token: $("password1").val()
     },
-    function (req, resp) {
-        $('#eventsearchresult').html("You are now registered");
+    function (data) {
+        $('#eventsearchresultextended').html("\n" + data);
     })
     return false;
 }
