@@ -35,45 +35,69 @@
     </nav>
 
     <div class="container">
-        <!--Needs a recognisable grid layout-->
-        <h1>Fell Race Organiser</h1>
+        <div class="row">
+            <div class="col-md-5">
+                <!--Needs a recognisable grid layout-->
+                <h1>Fell Race Organiser</h1>
 
 
-        <form id="searchform" action="http://localhost:8090">
-            Find a user by username:<br>
-            <input type="text" id="username">
-            <button id="submitButton">Search</button> <br>
-        </form>
+                <form id="searchform" action="http://localhost:8090">
+                    Find a user by username:<br>
+                    <input type="text" id="username">
+                    <button id="submitButton">Search</button> <br>
+                </form>
 
-        <div id="searchresult"> </div>
+                <div id="searchresult"> </div>
 
-        <br><br>
-        <!--Collapsible 'add a person' button and form-->
-        <button data-toggle="collapse" data-target="#demo">Add a person</button> <br /><br />
+                <br><br>
+                <!--Collapsible 'add a person' button and form-->
+                <button data-toggle="collapse" data-target="#demo">Add a person</button> <br /><br />
 
-        <div id="demo" class="collapse">
-            <form id="addform" action="http://localhost:8090">
-                Username: <input type="text" id="addPerson1"> <br /> <br />
-                Forename: <input type="text" id="addPerson2">
-                Surname: <input type="text" id="addPerson3"> <br><br />
-                Date of Birth: <input type="date" id="DoB" /> <br /> <br />
-                Sex: M <input type="radio" id="sexM" name="sex" value="M" /> F <input type="radio" id="sexF" name="sex" value="F" /> <br /> <br />
-                Disability? <input type="checkbox" id="addPersonDisability" value="d" /> <br /> <br />
-                <button id="addButton">Add</button>
-                <br> <br>
-            </form>
+                <div id="demo" class="collapse">
+                    <form id="addform" action="http://localhost:8090">
+                        Username: <input type="text" id="addPerson1"> <br /> <br />
+                        Forename: <input type="text" id="addPerson2">
+                        Surname: <input type="text" id="addPerson3"> <br><br />
+                        Date of Birth: <input type="date" id="DoB" /> <br /> <br />
+                        Sex: M <input type="radio" id="sexM" name="sex" value="M" /> F <input type="radio" id="sexF" name="sex" value="F" /> <br /> <br />
+                        Disability? <input type="checkbox" id="addPersonDisability" value="d" /> <br /> <br />
+                        <button id="addButton">Add</button>
+                        <br> <br>
+                    </form>
+                </div>
+
+                <div id="added"> </div><br /><br />
+
+                <form id="eventaddpersonform">
+                    Add a user to an event:<br />
+                    <div id="useroptions"></div>
+                    <div id="eventoptions"></div>
+                    <button id="eventaddperson">Add to Event</button>
+                </form>
+                <div id="addedtoevent"></div>
+                <br /><br /><br />
+                <!--Collapsible 'add an event' button and form-->
+                <button data-toggle="collapse" data-target="#demo2">Add a new event</button> <br /><br />
+
+                <div id="demo2" class="collapse">
+                    <form id="addeventform">
+                        Event name: <input type="text" id="evntname"> <br /> <br />
+                        Date: <input type="date" id="evntdate">
+                        <button id="addEventButton">Add</button>
+                        <br> <br>
+                    </form>
+                </div>
+
+                <div id="addedEvent"> </div><br /><br />
+
+            </div>
+            <div class="col-md-7">
+                <img src="trail.png" />
+            </div>
+            <!--<div class="col-md-4">
+                <img src="tree.png" />
+            </div>-->
         </div>
-
-        <div id="added"> </div><br /><br />
-
-        <form id="eventaddpersonform">
-            Add a user to an event:<br />
-            <div id="useroptions"></div> 
-            <div id="eventoptions"></div> 
-            <button id="eventaddperson">Add to Event</button>
-        </form>
-        <div id="addedtoevent"></div>
-
     </div>
 
     <script src="scripting.js"></script>

@@ -22,8 +22,8 @@ var people = [{
 var passwords = ["pwd123"];
 
 //entrants is a list of people, who must be elements of the 'people' list
-var events = [{ "name": "Pen y Fan", "date": "09-07-19", "entrants": [people[0]] },
-    { "name": "Fan y Big", "date": "10-07-19", "entrants": [] }];
+var events = [{ "name": "Pen y Fan", "date": "2019-07-09", "entrants": [people[0]] },
+    { "name": "Fan y Big", "date": "2019-07-10", "entrants": [] }];
 
 
 app.get("/people/:username", function (req, resp) {
@@ -81,13 +81,13 @@ app.get("/events", function (req, resp) {
 })
 
 app.post("/addtoevent", function (req, resp) {
-    //console.log(req.body); //debugging 
     var u = req.body.username;
     var nameordate = req.body.event;
     var person = people.find(x => x.username === u);
     var event;
 
-    event = events.find(x => x.name.toLowerCase() === nameordate.toLowerCase());
+    var eventname_formatted = nameordate.replace(/%20/gi, " ");
+    event = events.find(x => x.name.toLowerCase() === eventname_formatted.toLowerCase());
 
     if (event == undefined) {
         //must have been a date instead 
@@ -107,6 +107,22 @@ app.post("/addtoevent", function (req, resp) {
     }
     else {
         resp.send("Incorrect username or password.");
+    }
+})
+
+app.post("/addevent", function (req, resp) {
+    var eventname = req.body.eventname;
+
+    //checking 
+    var e = events.find(x => x.name === eventname);
+    if (e == undefined) {
+        var date = req.body.date;
+        var event = { "name": eventname, "date": date, "entrants": [] };
+        events.push(event);
+        resp.send("Event created " + event.name);
+    }
+    else {
+        resp.send("This event already exists.");
     }
 })
 

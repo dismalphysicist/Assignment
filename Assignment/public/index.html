@@ -35,49 +35,62 @@
     </nav>
 
     <div class="container">
-        <!--Needs a recognisable grid layout-->
-        <h1>Fell Race Calendar</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <!--Needs a recognisable grid layout-->
+                <h1>Fell Race Calendar</h1>
+
+                <br />
+                <p>
+                    Welcome to the Fell Race Calendar. Fell running is defined as "the sport of running and racing,
+                    off road, over upland country where the gradient climbed is a significant component of the
+                    difficulty". Nevertheless the sport has grown out of amateur runners and has a strong community
+                    which welcomes new participants.
+                </p>
+                <p>
+                    In order to register for events online, you will need to register using the 'Create an account'
+                    button below.
+                </p>
+                <br />
 
 
-        <form id="eventsearchform" action="http://localhost:8090">
-            Find an event:<br>
-            <input type="text" id="eventname">
-            <button id="eventsubmitButton">Search</button> <br>
-        </form>
+                <!--<form id="eventsearchform" action="http://localhost:8090">
+                    Find an event:<br>
+                    <input type="text" id="eventname">
+                    <button id="eventsubmitButton">Search</button> <br>
+                </form>-->
 
-        <div id="eventsearchresult"></div> <div id="eventsearchresultextended"> </div><br /><br />
+                <form id="eventsearchform">
+                    Find an event: <br />
+                    <div id="events_search"></div>
+                    <button id="eventsubmitButton">Search</button> <br>
+                </form>
 
-        <!--Collapsible 'login' button and form-->
-        <!--<button data-toggle="collapse" data-target="#demo">Login</button> <br /><br />
+                <div id="eventsearchresult"></div> <div id="eventsearchresultextended"> </div><br /><br />
 
-        <div id="indexlogin" class="collapse">
-            <form id="addform" action="http://localhost:8090">
-                Username: <input type="text" id="loginusername"> <br /> <br />
-                Password: <input type="text" id="loginpassword"> <br /> <br />
-                <button id="addButton">Create</button>
-                <br> <br>
-            </form>
-        </div>-->
+                <!--Collapsible 'create an account' button and form-->
+                <button data-toggle="collapse" data-target="#indexcreateaccount">Create an account</button> <br /><br />
 
-        <!--Collapsible 'create an account' button and form-->
-        <button data-toggle="collapse" data-target="#indexcreateaccount">Create an account</button> <br /><br />
+                <div id="indexcreateaccount" class="collapse">
+                    <form id="indexaddform" action="http://localhost:8090">
+                        Username: <input type="text" id="createaccountusername"> <br /> <br />
+                        Forename: <input type="text" id="createaccountforename"> <br /><br>
+                        Surname: <input type="text" id="createaccountsurname"> <br><br />
+                        Date of Birth: <input type="date" id="indexDoB" /> <br /> <br />
+                        Sex: M <input type="radio" name="index_sex" id="index_sexM" value="M" /> F <input type="radio" name="index_sex" id="index_sexF" value="F" /> <br /> <br />
+                        Disability? <input type="checkbox" id="indexaddPersonDisability" name="indexaddPersonDisability" value="d" /> <br /> <br />
+                        Password: <input type="text" id="password"> <br /> <br />
+                        <button id="createButton">Create</button>
+                        <br> <br>
+                    </form>
+                </div>
 
-        <div id="indexcreateaccount" class="collapse">
-            <form id="indexaddform" action="http://localhost:8090">
-                Username: <input type="text" id="createaccountusername"> <br /> <br />
-                Forename: <input type="text" id="createaccountforename">
-                Surname: <input type="text" id="createaccountsurname"> <br><br />
-                Date of Birth: <input type="date" id="indexDoB" /> <br /> <br />
-                Sex: M <input type="radio" name="index_sex" id="index_sexM" value="M" /> F <input type="radio" name="index_sex" id="index_sexF" value="F" /> <br /> <br />
-                Disability? <input type="checkbox" id="indexaddPersonDisability" name="indexaddPersonDisability" value="d" /> <br /> <br />
-                Password: <input type="text" id="password"> <br /> <br />
-                <button id="createButton">Create</button>
-                <br> <br>
-            </form>
+                <div id="createdaccount"> </div><br /><br />
+            </div>
+            <div class="col-md-8">
+                <img src="fell_race.png" />
+            </div>
         </div>
-
-        <div id="createdaccount"> </div><br /><br />
-
     </div>
 
     <script src="scripting.js"></script>

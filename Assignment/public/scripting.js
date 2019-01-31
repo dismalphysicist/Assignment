@@ -136,10 +136,10 @@ function createAccount() {
 }
 
 function eventsearch() {
-    var n = $("#eventname").val();
+    var n_formatted = $("#event_search").val();
 
-    if (n !== "") {
-        $.get("http://localhost:8090/events/" + n, "",
+    if (n_formatted !== "") {
+        $.get("http://localhost:8090/events/" + n_formatted, "",
             function (data) {
                 if (data.name !== undefined) {
                     $("#eventsearchresult").html(data.name + ": " + data.date
@@ -147,7 +147,7 @@ function eventsearch() {
                         + '<br><button id="cleareventsearch">Clear search</button>');
 
                     $("#registerinterest").click(function () {
-                        $("#eventsearchresult").append('<div id="showwhenregistering"> <form id="registerforeventform"> Username: <input type="text" id="uname" /> Password: <input type="text" id="password1" /><button id="reg">Register</button></form></div>');
+                        $("#eventsearchresult").append('<div id="showwhenregistering"> <form id="registerforeventform"> Username: <input type="text" id="uname" /><br> Password:  <input type="text" id="password1" />  <button id="reg">Register</button></form></div>');
                         $("#reg").click(register);
                     });
 
@@ -166,12 +166,13 @@ function eventsearch() {
 function register() {
     $.post("http://localhost:8090/addtoevent/", {
         username: $("#uname").val(),
-        event: $("#eventname").val().trim(),
+        event: $("#event_search").val(),
         access_token: $("#password1").val()
     },
     function (data) {
         $('#eventsearchresultextended').html("\n" + data);
     })
+    update();
     return false;
 }
 
@@ -188,7 +189,27 @@ function addtoevent() {
     })
     $("#searchresult").html(""); //clear search result 
     $("#added").html("");
+    update();
     return false;
+}
+
+function addevent() {
+    if ($("#evntname").val() == "" | $("#evntdate").val() == "") {
+        $("#addedEvent").html("Please fill in all fields.");
+        return false;
+    }
+    else {
+        $.post("http://localhost:8090/addevent", {
+                eventname: $("#evntname").val(),
+                date: $("#evntdate").val(),
+                access_token: "concertina"
+            },
+            function (data) {
+                $("#addedEvent").html(data);
+            })
+        update();
+        return false;
+    }
 }
 
 function update() {
@@ -206,13 +227,19 @@ function update() {
 
     $.get("http://localhost:8090/events", "",
         function (data) {
-            var options = '<select id="event">';
+            var options = "<select id='event'>";
+            var options2 = "<select id='event_search'>";
             for (var i = 0; i < data.length; i++) {
                 var event = data[i];
-                options += '<option value=' + event.date + '>' + event.name + " " + event.date + '</option>';
+                var event_name_formatted = event.name.replace(/ /gi, "%20")
+                console.log(event_name_formatted); //debugging 
+                options += "<option value=" + event.date + ">" + event.name + " " + event.date + "</option>";
+                options2 += "<option value=" + event_name_formatted + ">" + event.name + " " + event.date + "</option>";
             }
-            options += '</select>';
+            options += "</select>";
+            options2 += "</select>";
             $("#eventoptions").html(options);
+            $("#events_search").html(options2);
         });
 }
 
@@ -238,3 +265,6 @@ $("#eventsearchform").submit(eventsearch);
 
 $("#eventaddperson").click(addtoevent);
 $("#eventaddpersonform").submit(addtoevent);
+
+$("#addEventButton").click(addevent);
+$("#addeventform").submit(addevent);
