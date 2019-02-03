@@ -143,7 +143,7 @@ function eventsearch() {
             function (data) {
                 if (data.name !== undefined) {
                     $("#eventsearchresult").html(data.name + ": " + data.date
-                        + '<br><button id="registerinterest">Register interest</button>'
+                        + '<br><button id="registerinterest">Register</button>'
                         + '<br><button id="cleareventsearch">Clear search</button>');
 
                     $("#registerinterest").click(function () {
@@ -172,7 +172,7 @@ function register() {
     function (data) {
         $('#eventsearchresultextended').html("\n" + data);
     })
-    update();
+    //update();
     return false;
 }
 
@@ -189,7 +189,7 @@ function addtoevent() {
     })
     $("#searchresult").html(""); //clear search result 
     $("#added").html("");
-    update();
+    //update();
     return false;
 }
 
